@@ -1,11 +1,5 @@
 RewriteEngine On
 
-# 特定のファイルを直接アクセスさせない
-# RewriteCond %{REQUEST_URI} ^/package\.json$ [OR]
-# RewriteCond %{REQUEST_URI} ^/composer\.json$ [OR]
-# RewriteCond %{REQUEST_URI} ^/other-file\.ext$  # 必要に応じて他のファイルも追加
-# RewriteRule ^ index.php [QSA,L]
-
 # ドキュメントルート直下のすべてのファイルを index.php にリダイレクト
 RewriteCond %{REQUEST_URI} !^/index\.php$
 RewriteCond %{REQUEST_URI} !^/dist/
@@ -13,6 +7,7 @@ RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*)$ index.php [QSA,L]
 
 # 存在しないファイルやディレクトリを index.php にリダイレクト
+RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
