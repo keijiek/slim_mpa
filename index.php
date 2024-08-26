@@ -16,12 +16,16 @@ $errorMiddleware = $app->addErrorMiddleware(false, true, true);
 
 
 $app->get('/', function (Request $request, Response $response, $args) {
-  $response->getBody()->write('<a href="/second">Hello world!</a><br /><a href="/classes/">classes</a><br /><a href="/classes/Vite_Manifest_Production.class.php">classes/script</a>');
+  $html = (new FrontPageController())->html();
+  $response->getBody()->write($html);
   return $response;
 });
 
 $app->get('/second', function (Request $request, Response $response, $args) {
-  $response->getBody()->write('<a href="/">This is Second Page</a>');
+  ob_start();
+  require_once(__DIR__ . '/html/second-page.php');
+  $html = ob_get_clean();
+  $response->getBody()->write($html);
   return $response;
 });
 

@@ -12,7 +12,6 @@ export default defineConfig({
     manifest: true,
     watch: {
       include: [
-        './*.php',
         './classes/**/*.php',
         './html/**/*.{html,php}',
         './src/**/*.{css,js,ts}'
